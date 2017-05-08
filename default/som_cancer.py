@@ -8,8 +8,11 @@ import matplotlib.pyplot as plt
 csvfile = open('../breast-cancer/breast-cancer_shuffled.csv', 'rt')
 lines = csv.reader(csvfile)
 dataset = list(lines)
-
+#sufle dataset
+random.shuffle(dataset)
+original_data = numpy.array(dataset)
 #convert to numpy and remove class collun
+
 data = numpy.array(dataset)
 data = numpy.delete(data, numpy.s_[-1], axis=1)  
 data = data.astype(numpy.float) 
@@ -46,11 +49,6 @@ class_mapping = {
     1 : [0,0,1]  #blue
 }
 
-
-csvfile = open('../breast-cancer/breast-cancer_shuffled.csv', 'rt')
-lines = csv.reader(csvfile)
-dataset = list(lines)
-original_data = numpy.array(dataset)
 
 outputImage = numpy.zeros(shape=(somCol,somRow,3))
 

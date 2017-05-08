@@ -6,7 +6,6 @@ import decimal
 import matplotlib.pyplot as plt
 
 
-
 input = numpy.array(
          [[1, 0, 0], #red
           [1, 1, 0 ], #yellow
@@ -20,18 +19,10 @@ somRow = 40
 
 sigmaInitial = 20
 radius = 18
-# maxIterations = 10000
 maxIterations = 500* (somCol * somRow)
+
 
 som = som(input,maxIterations ,sigmaInitial,somCol,somRow,radius)
 ans = som.trainmodel()
-
-# plt.imshow(ans, interpolation="nearest")
-# plt.show()
-# while True:
-#     plt.pause(0.05)
-# print 'trained model is',ans
-
-# print data
 
 

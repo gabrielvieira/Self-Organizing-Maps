@@ -34,11 +34,6 @@ class som:
 
         # Time constant for sigma
         t1 = maxIterations / numpy.log(sigmaInitial)
-
-        #Initialise matrix to store eucledian distances.
-        #euclideanD = numpy.zeros(shape =(somRow, somCol))
-
-        # Initialize 10x10 matrix to store neighbourhood functions
         # of each neurons on the map
         neighbourhoodFunctionVal = numpy.zeros(shape =(somRow, somCol));
 
@@ -53,8 +48,6 @@ class som:
                 #Squeezed the matrix into an ndarray.
                 somMap[num,iter,:] = numpy.squeeze(numpy.random.rand(inputvectorlen,1))
 
-        ##print "Again #printing the som with randomly initialised weight vectors"
-        #print somMap
 
         plt.ion()
 
@@ -73,7 +66,6 @@ class som:
             selectedWeightVector = input[inputIndex,:]
 
             #Select the winning neuron which has the weight vector closest to that of selected input weight vector.
-            #Find the indices of minimum eucledian distance element.
             mineuclideanD=numpy.linalg.norm(selectedWeightVector-somMap[0,0,:])
             minr=0
             minc=0
@@ -86,7 +78,6 @@ class som:
                         minr=num
                         minc=iter
                         mineuclideanD=temp
-            #print euclideanD
 
 
             radiusMinCol = minc - radius
@@ -107,8 +98,7 @@ class som:
             if radiusMaxRow > somRow:
                 radiusMaxRow = somRow
 
-            #compute the neighbourhood function for all the neurons
-            #For the winning noe
+            #compute the neighbourhood function for neighbourhood neurons
             for r in range (radiusMinRow,radiusMaxRow):
                 for c in range (radiusMinCol,radiusMaxCol):
                     if (r == minr & c == minc):  
@@ -118,27 +108,25 @@ class som:
                         distance = numpy.linalg.norm(  numpy.array([r,c]) - numpy.array([minr, minc]) )
                         neighbourhoodFunctionVal[r, c] = numpy.exp(-distance/(2*variance));
 
-            #print 'neighbourhood functions are',neighbourhoodFunctionVal
             #Update weights 
-
             for r in range (radiusMinRow,radiusMaxRow):
                 for c in range (radiusMinCol,radiusMaxCol):
                     oldWeightVector = somMap[r, c,:]
                     somMap[r, c,:]     = oldWeightVector + eta*neighbourhoodFunctionVal[r, c]*(selectedWeightVector - oldWeightVector)
 
-            #Increment the counter
 
-
-            # img = rand(5, 5) 
             if count%30 == 0:
                 plt.imshow(somMap, interpolation="nearest") 
                 plt.pause(0.01)
             print count
             count +=1
 
-        #Return updated map of neurons.
+        #show at final 
+        # plt.imshow(somMap, interpolation="nearest") 
+        # plt.pause(0.01)
+
         while True:
             plt.pause(0.01)
-        # print count
+        print count
         return somMap
         

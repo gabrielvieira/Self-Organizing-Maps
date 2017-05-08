@@ -8,6 +8,9 @@ import matplotlib.pyplot as plt
 csvfile = open('../iris/iris_shuffled.csv', 'rt')
 lines = csv.reader(csvfile)
 dataset = list(lines)
+#sufle dataset
+random.shuffle(dataset)
+original_data = numpy.array(dataset)
 
 #convert to numpy and remove class collun
 data = numpy.array(dataset)
@@ -47,11 +50,6 @@ class_mapping = {
     2 : [0,0,1]  #blue
 }
 
-
-csvfile = open('../iris/iris_shuffled.csv', 'rt')
-lines = csv.reader(csvfile)
-dataset = list(lines)
-original_data = numpy.array(dataset)
 
 outputImage = numpy.zeros(shape=(somCol,somRow,3))
 
