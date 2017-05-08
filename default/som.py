@@ -30,7 +30,7 @@ class som:
         sigmaInitial = self.sigmaInitial
 
         # Time constant for sigma
-        t1 = maxIterations / numpy.log(sigmaInitial)
+        t1 = 1000 / numpy.log(sigmaInitial)
 
         #Initialise matrix to store eucledian distances.
         #euclideanD = numpy.zeros(shape =(somRow, somCol))
@@ -43,7 +43,7 @@ class som:
         learningRateInitial = 0.1;
 
         #time constant for eta
-        t2 = maxIterations;
+        t2 = 1000;
         #Assign random weight vectors for all the neurons
         for num in range (0,(somRow)):
             for iter in range (0,(somCol)):
